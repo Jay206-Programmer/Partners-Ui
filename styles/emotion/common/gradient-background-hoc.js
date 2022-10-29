@@ -6,30 +6,12 @@ const CONSTANTS = getStyleConstants();
 
 export const GradientBGDark = styled.div`
     height: inherit;
-    background: linear-gradient(
-        109.6deg,
-        rgb(157, 75, 199) 11.2%,
-        rgb(119, 81, 204) 83.1%
-    );
-    ${({showShadowOverlay}) =>
-        showShadowOverlay &&
-        `&::after {
-        content: "";
-        display: inline-block;
-        width: 100%;
-        height: inherit;
-        position: absolute;
-        top: 0px;
-        left: 0px;
-        background-color: black;
-        mask-image: -webkit-gradient(
-            linear,
-            left top,
-            left bottom,
-            from(${CONSTANTS.primary_bg_color.concat("FF")}), /* Max Opacity */
-            to(${CONSTANTS.primary_bg_color.concat("00")}) /* Min Opacity */
-        );
-      }`}
+    background: 
+        ${props => (
+            props.showShadowOverlay
+            ? `linear-gradient(${props.reverseOverlay ? '0deg' : '180deg'}, ${CONSTANTS.primary_bg_color.concat("FF")},${CONSTANTS.primary_bg_color.concat("00")})`
+            : 'linear-gradient(180deg, #00000000, #00000000)')},
+        linear-gradient(109.6deg, rgb(157, 75, 199) 11.2%, rgb(119, 81, 204) 83.1%);
 `;
 
 export const WavesContainer = styled.div`
